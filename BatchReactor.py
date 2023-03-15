@@ -25,7 +25,7 @@ class Reactor():
         self.U = 40.842
         self.rho = 1000
         self.rhoj = 1000
-        
+
         self.r = 0.5
         self.Fj = 0.348
         self.Vj = 0.6921
@@ -35,21 +35,18 @@ class Reactor():
         if (noise != None):
             self.Ma = 12 + np.random.normal(0,1)*np.sqrt(noise)
             self.Mb = 12 + np.random.normal(0,1)*np.sqrt(noise)
-            self.Mc = 0
-            self.Md = 0
-            
             self.Tr = 20 + np.random.normal(0,1)*np.sqrt(noise)
             self.Tj = T0 + np.random.normal(0,1)*np.sqrt(noise)
 
         else:
             self.Ma = 12
             self.Mb = 12
-            self.Mc = 0
-            self.Md = 0
-            
             self.Tr = 20
             self.Tj = 20
 
+        self.Md = 0
+
+        self.Mc = 0
         self.M = [self.Ma, self.Mb, self.Mc, self.Md]
         
         

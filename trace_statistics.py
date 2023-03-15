@@ -16,13 +16,10 @@ def pickle_load(path, noise):
 
 num_trajectories = 50
 noise = 3
-TR = {}
-
-# ======= Evaluating 50 Cheamical Batch Reactor trajectories ======
-
-for i in range(num_trajectories):
-    TR[i] = PID_Loop.loop(signals.constant_signal, noise=noise)
-
+TR = {
+    i: PID_Loop.loop(signals.constant_signal, noise=noise)
+    for i in range(num_trajectories)
+}
 #pickle_save(path='data/stat_constant_noise', noise = noise)
 TR = pickle_load(path='data/stat_constant_noise', noise = noise)
 
@@ -43,7 +40,7 @@ plt.ylabel("T", fontsize=18)
 plt.xticks(fontsize=17)
 plt.yticks(fontsize=17)
 plt.grid()
-plt.savefig("stat_constant_noise" + str(noise) + ".png", bbox_inches='tight')
+plt.savefig(f"stat_constant_noise{noise}.png", bbox_inches='tight')
 plt.show()
 
 robustness = {}
@@ -65,8 +62,9 @@ for i, TRi in TR.items():
 
 print(robustness)
 
-beta0 = 0;  beta1 = 0
-for i, r in robustness.items():
+beta0 = 0
+beta1 = 0
+for r in robustness.values():
     if (r < 0): 
         beta0 = beta0 + 1
     else:

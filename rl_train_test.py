@@ -29,7 +29,7 @@ def train(Q_filename, Tjsp_slices, Tr_slices):
         R = Reactor.Reactor(random.randint(20,139), noise = None)
         Tjsp = random.randint(20,119)
 
-        (Tr, Tj) = R.get_T()  
+        (Tr, Tj) = R.get_T()
         M = R.get_M()
         Tr_slice = RF.find_slice_TR(Tr)
         Tjsp_slice = RF.find_slice_TJSP(Tjsp)
@@ -59,7 +59,7 @@ def train(Q_filename, Tjsp_slices, Tr_slices):
 
             # A'
             a1 = RF.select_action(epsilon, Tjsp1_slice, Tr1_slice)
-            
+
             if ( debug ):
                 print("actual state Tjsp=", Tjsp, ", Tjsp_slice=", Tjsp_slice, ", Tr_slice=", \
                     Tr_slice, ", Tr = ", Tr, ", a=", a)
@@ -75,7 +75,7 @@ def train(Q_filename, Tjsp_slices, Tr_slices):
             assert( math.isnan(RF.Q[Tjsp1_slice, Tr1_slice]) == False)
 
             RF.fill_Q(Tjsp_slice, Tr_slice, reward, Tjsp1_slice, Tr1_slice)
-                
+
             if (Tr1 >= 170):
                 break
 
@@ -85,7 +85,7 @@ def train(Q_filename, Tjsp_slices, Tr_slices):
             Tjsp = Tjsp1
             a = a1
 
-        it = it + 1
+        it += 1
 
     RF.printmat()
     np.savetxt(Q_filename, RF.Q, fmt='%d')
@@ -101,15 +101,14 @@ def test(epsilon, file, Tjsp_slices, Tr_slices):
     R = Reactor.Reactor(20, noise = None)
     Tjsp = 20
 
-    (Tr, Tj) = R.get_T()  
+    (Tr, Tj) = R.get_T()
     M = R.get_M()
     Tr_slice = RF.find_slice_TR(Tr)
     Tjsp_slice = RF.find_slice_TJSP(Tjsp)
 
     a = RF.select_action(0, Tjsp_slice, Tr_slice)
 
-    for _,_ in enumerate(times):
-
+    for _ in times:
         TR.append(Tr)
 
         R.dynamics(Tr, Tj, Tjsp, M, interval)

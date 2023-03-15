@@ -20,11 +20,11 @@ class ReinforcementLearning():
         self.s_tr = Tr
 
     def update_state(self, Tjsp, a, it):
-        if (a == 2 and it == self.learning_episodes-1):
-            Tjsp1 = Tjsp + a
-        else:
-            Tjsp1 = Tjsp + a - 1
-        return Tjsp1
+        return (
+            Tjsp + a
+            if (a == 2 and it == self.learning_episodes - 1)
+            else Tjsp + a - 1
+        )
 
     def fill_Q(self, Tjsp_slice, Tr_slice, reward, Tjsp1_slice, Tr1_slice):
         self.Q[Tjsp_slice, Tr_slice] = self.Q[Tjsp_slice, Tr_slice] + self.alpha*(reward + \

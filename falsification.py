@@ -14,8 +14,7 @@ mmax = 299
 interval = 0.5
 times = np.arange(1,mmax,interval)
 
-Signals = []
-Signals.append(pickle_load(path='data/TRf1.txt'))
+Signals = [pickle_load(path='data/TRf1.txt')]
 Signals.append(pickle_load(path='data/TRf2.txt'))
 Signals.append(pickle_load(path='data/TRf3.txt'))
 Signals.append(pickle_load(path='data/TRf4.txt'))
