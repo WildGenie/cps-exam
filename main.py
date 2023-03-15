@@ -54,7 +54,7 @@ def plotter(name, times, plot_vals1, plot_vals2, label1, label2, ylab, xlab = 't
     plt.yticks(fontsize=17)
     plt.legend(fontsize=18)
     plt.grid()
-    plt.savefig(name+".png", bbox_inches='tight')
+    plt.savefig(f"{name}.png", bbox_inches='tight')
 
 # PLOTTING STUFF
 
